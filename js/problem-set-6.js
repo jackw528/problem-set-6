@@ -11,10 +11,13 @@
  */
 
 function sayHello() {
-
+  let ctx = document.getElementById("canvas1").getContext("2d");
+  ctx.clearRect(0, 0, 1024, 128)
+  ctx.font = "48px sans-serif";
+  ctx.strokeText("Hello, World!", 10, 50);
 }
 
-/*
+  /*
  * Rectangle. 3 points.
  *
  * Write a function that draws a rectangle on the canvas. You should prompt
