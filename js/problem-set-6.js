@@ -15,7 +15,7 @@ function sayHello() {
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.length);
   ctx.font="48px sans-serif";
-  ctx.strokeText("Hello, World", 10, 50);
+  ctx.strokeText("Hello, World!", 10, 50);
 
 
 }
