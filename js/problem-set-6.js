@@ -50,8 +50,8 @@ function drawRectangle() {
   while(true){
     var width=Number(prompt("Enter a valid width"))
     var height=Number(prompt("Enter a valid height"))
-    var x=Number(prompt("Enter a valid topLeft x"))
-    var y=Number(prompt("Enter a valid topLeft y"))
+    var x=Number(prompt("Enter a valid X"))
+    var y=Number(prompt("Enter a valid Y"))
     if(width>=1 && height>=1 && x>=5 && y>=5 && canvas.width-x-width>=0 && canvas.height-y-height>=0){
       break;
     }
@@ -141,8 +141,8 @@ function drawTriangle() {
   let context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
   while(true){
-	a=Number(prompt("Enter side 1 length"));
-	b=Number(prompt("Enter side 2 length"));
+	a=Number(prompt("Enter leg 1 length"));
+	b=Number(prompt("Enter leg 2 length"));
 	c=Number(prompt("Enter hypotenuse length"));
 	if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.height-y-b>=0){
 		break;
@@ -193,7 +193,7 @@ function drawSmileyFace() {
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 	while(true){
-		radius=Number(prompt("Please enter a good radius please"));
+		radius=Number(prompt("Please enter a radius."));
 		if(radius>=1 && radius<=canvas.width && Number.isInteger(radius)){
 			break;
 		}
@@ -348,7 +348,7 @@ function drawPyramid() {
   let canvas = document.getElementById('canvas8');
   let ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  let sideLength=Number(prompt("enter a side length"));
+  let sideLength=Number(prompt("Enter a side length"));
   let x=10;
   let y=canvas.height-10;
   let i=0;
@@ -400,8 +400,8 @@ function drawHouse() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   while(true){
-  doorColor=prompt("Enter a color for the Door");
-  houseColor=prompt("Enter a color for the House");
+  doorColor=prompt("Enter a color for the door");
+  houseColor=prompt("Enter a color for the house");
   if((doorColor=="brown" || doorColor=="blue" || doorColor=="green" || doorColor=="orange" || doorColor=="purple" || doorColor=="red" || doorColor=="yellow")
   && (houseColor=="brown" || houseColor=="blue" || houseColor=="green" || houseColor=="orange" || houseColor=="purple" || houseColor=="red" || houseColor=="yellow")) {
     break;
