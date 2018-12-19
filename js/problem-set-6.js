@@ -11,13 +11,16 @@
  */
 
 function sayHello() {
-  let ctx = document.getElementById("canvas1").getContext("2d");
-  ctx.clearRect(0, 0, 1024, 128)
-  ctx.font = "48px sans-serif";
-  ctx.strokeText("Hello, World!", 10, 50);
+  let canvas = document.getElementById('canvas1');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.length);
+  ctx.font="48px sans-serif";
+  ctx.strokeText("Hello, World", 10, 50);
+
+
 }
 
-  /*
+/*
  * Rectangle. 3 points.
  *
  * Write a function that draws a rectangle on the canvas. You should prompt
@@ -41,6 +44,19 @@ function sayHello() {
  */
 
 function drawRectangle() {
+  let canvas = document.getElementById('canvas2');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height)
+  while(true){
+    var width=Number(prompt("Enter a valid width"))
+    var height=Number(prompt("Enter a valid height"))
+    var x=Number(prompt("Enter a valid topLeft x"))
+    var y=Number(prompt("Enter a valid topLeft y"))
+    if(width>=1 && height>=1 && x>=5 && y>=5 && canvas.width-x-width>=0 && canvas.height-y-height>=0){
+      break;
+    }
+  }
+  ctx.strokeRect(x, y, width, height);
 
 }
 
@@ -70,6 +86,19 @@ function drawRectangle() {
  */
 
 function drawColoredRectangle() {
+  let canvas = document.getElementById("canvas3");
+  let context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  let color;
+  while(true){
+    color=prompt("Please Enter a Valid Color")
+    if(color=="black" || color=="blue" || color=="green" || color=="orange" || color=="purple" || color=="red" || color=="yellow") {
+      break;
+    }
+  }
+  context.fillStyle=color;
+  context.fillRect(10,10,100,50);
 
 }
 
@@ -103,8 +132,41 @@ function drawColoredRectangle() {
  */
 
 function drawTriangle() {
-
+  let x=10;
+  let y=10;
+  let a;
+  let b;
+  let c;
+  let canvas = document.getElementById("canvas4");
+  let context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  while(true){
+	a=Number(prompt("Enter side 1 length"));
+	b=Number(prompt("Enter side 2 length"));
+	c=Number(prompt("Enter hypotenuse length"));
+	if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.height-y-b>=0){
+		break;
+	}else{
+		alert("That is not a valid triangle")
+	}
+  }
+ //Line A
+ context.beginPath(); //Begins a path
+ context.moveTo(x,y); //Choses the starting point
+ context.lineTo(x,y+a); //Line A coordinates: It is a vertical line, therefore the same x value but different y-value
+ context.stroke(); //Draws the line
+ //Line B
+ context.beginPath();
+ context.moveTo(x,y+a);
+ context.lineTo(x+b,y+a);
+ context.stroke();
+ //Hypotenuse
+ context.beginPath();
+ context.moveTo(x,y);
+ context.lineTo(x+b,y+a);
+ context.stroke();
 }
+
 
 /*
  * Smile. 7 points.
@@ -126,8 +188,38 @@ function drawTriangle() {
  */
 
 function drawSmileyFace() {
+  let radius;
+  let canvas = document.getElementById('canvas5');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+	while(true){
+		radius=Number(prompt("Please enter a good radius please"));
+		if(radius>=1 && radius<=canvas.width && Number.isInteger(radius)){
+			break;
+		}
+	}
+  let x=canvas.width;
+  let y=canvas.height;
+  let eyeRadius=radius*.1
+  let mouthRadius=radius*.7
+  ctx.beginPath();
+  ctx.arc(x/2, y/2, radius, 0, Math.PI*2); // Face
+  ctx.stroke();
 
-}
+  ctx.beginPath(); //Right Eye
+  ctx.arc(x/2 - radius/3, y/2-radius/4, eyeRadius,0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath(); //Left Eye
+  ctx.arc(x/2+radius/3, y/2-radius/4, eyeRadius,0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath(); //Mouth
+  ctx.arc(x/2, y/2, mouthRadius,0, Math.PI);
+  ctx.stroke();
+  }
+
+
 
 /*
  * Star. 9 points.
@@ -148,8 +240,41 @@ function drawSmileyFace() {
  */
 
 function drawStar() {
+    let canvas = document.getElementById('canvas6');
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-}
+      let outerRadius=Number(prompt("Enter a valid outer radius"));
+      let innerRadius=Number(prompt("Enter a valid inner radius"));
+      if (outerRadius>=innerRadius && canvas.width>=outerRadius+125 && canvas.height>=outerRadius+125 && innerRadius>=1 && outerRadius>=1){
+        let points=5;
+        let outerx=[];
+        let outery=[];
+        let innerx=[];
+        let innery=[];
+        for(let i=0;i<points;i++){
+          outerx.push(Math.cos((Math.PI*2*i)/points-(Math.PI/2))*outerRadius+125);
+          outery.push(Math.sin((Math.PI*2*i)/points-(Math.PI/2))*outerRadius+125);
+          innerx.push(Math.cos(((Math.PI*2*i)/points)-(Math.PI/2)+(Math.PI/points))*innerRadius+125);
+          innery.push(Math.sin(((Math.PI*2*i)/points)-(Math.PI/2)+(Math.PI/points))*innerRadius+125);
+        }
+        ctx.beginPath();
+        ctx.moveTo(outerx[0], outery[0]);
+        for(let j=0;j<outerx.length;j++){
+          ctx.lineTo(innerx[j], innery[j]);
+          ctx.lineTo(outerx[j+1], outery[j+1]);
+        }
+        ctx.lineTo(outerx[0], outery[0]);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    else{
+        alert('invalid inputs');
+      }
+  }
+
+
+
 
 /*
  * Stop Sign. 7 points.
@@ -167,8 +292,39 @@ function drawStar() {
  */
 
 function drawStopSign() {
+  let canvas = document.getElementById('canvas7');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let sidelength=80;
+  let center=[10+(sidelength)/2+sidelength/Math.sqrt(2), 10+(sidelength/2)+(sidelength/Math.sqrt(2))]
+  console.log(center)
+  let points=8;
+  let pointx=[];
+  let pointy=[];
 
+  for(let i=0;i<points;i++){
+    pointx.push(Math.cos(((Math.PI*2*i)/points)-Math.PI/8)*100+center[0]);
+    pointy.push(Math.sin(((Math.PI*2*i)/points)-Math.PI/8)*100+center[1]);
+  }
+  ctx.beginPath();
+  ctx.moveTo([pointx][0], pointy[0]);
+  for(let j=0;j<pointx.length;j++){
+    ctx.lineTo(pointx[j], pointy[j]);
+  }
+  ctx.lineTo(pointx[0], pointy[0]);
+  ctx.stroke();
+
+  ctx.fillStyle="red";
+  ctx.fill();
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.textAlign="center";
+  ctx.font="56px Georgia";
+  ctx.fillStyle="white";
+  ctx.fillText("STOP", center[0], center[1]+15);
+  ctx.closePath()
 }
+
 
 /*
  * Pyramid. 7 points.
@@ -189,9 +345,26 @@ function drawStopSign() {
  */
 
 function drawPyramid() {
+  let canvas = document.getElementById('canvas8');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let sideLength=Number(prompt("enter a side length"));
+  let x=10;
+  let y=canvas.height-10;
+  let i=0;
+  lineNumber=1;
+  while(i<5){
+    for(let j=0+lineNumber;j<=5;j++){
+      ctx.strokeRect(x,y-sideLength,sideLength,sideLength);
+      x+=sideLength;
+    }
+    x=10+(sideLength/2)*lineNumber;
+    y-=sideLength;
+    lineNumber++;
+    i++;
+  }
 
 }
-
 /*
  * House. 7 points.
  *
@@ -222,5 +395,53 @@ function drawPyramid() {
  */
 
 function drawHouse() {
+  let canvas = document.getElementById('canvas9');
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  while(true){
+  doorColor=prompt("Enter a color for the Door");
+  houseColor=prompt("Enter a color for the House");
+  if((doorColor=="brown" || doorColor=="blue" || doorColor=="green" || doorColor=="orange" || doorColor=="purple" || doorColor=="red" || doorColor=="yellow")
+  && (houseColor=="brown" || houseColor=="blue" || houseColor=="green" || houseColor=="orange" || houseColor=="purple" || houseColor=="red" || houseColor=="yellow")) {
+    break;
+  }
+  else{
+      alert("One or more of your colors is invalid")
+  }
+}
+let x=150;
+let lengthHouse=576;
+let heightHouse=400;
+let y=canvas.height-heightHouse-10;
+ctx.beginPath();
+//house
+ctx.fillStyle=houseColor;
+ctx.fillRect(x,y,lengthHouse,heightHouse);
+//door
+ctx.fillStyle=doorColor;
+ctx.fillRect(x+(lengthHouse/2)-30,y+300,60,100);
+ctx.strokeRect(x+(lengthHouse/2)-30,y+300,60,100);
+ctx.stroke();
+
+//roof
+ctx.fillStyle="gray";
+ctx.moveTo(x,y);
+ctx.lineTo(x+286,150);
+ctx.lineTo(x+lengthHouse,y);
+ctx.lineTo(x,y);
+ctx.fill();
+//windows
+ctx.fillStyle="#ADD8E6";
+ctx.fillRect(300,y+100, 50, 50);
+ctx.fillRect(526,y+100, 50, 50);
+ctx.fillRect(300,y+200, 50, 50);
+ctx.fillRect(526,y+200, 50, 50);
+ctx.closePath();
+//doorknob
+ctx.beginPath();
+ctx.fillStyle='black';
+ctx.arc(450, 700, 6, 0, Math.PI*2);
+ctx.fill();
+ctx.closePath()
 }
