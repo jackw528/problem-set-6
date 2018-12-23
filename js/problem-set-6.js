@@ -16,7 +16,7 @@ function sayHello() {
   ctx.clearRect(0, 0, canvas.width, canvas.length);
   ctx.font="48px sans-serif";
   ctx.strokeText("Hello, World!", 10, 50);
-
+ 
 
 }
 
